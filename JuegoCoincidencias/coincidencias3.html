@@ -40,8 +40,8 @@
         for(i=0;i<ocultas.length;i++){
             ponimagen(destino, ocultas[i])
         }
-
     }
+    /*****************************************************************/
     function ponimagen(des,id){
         var elem = document.createElement("img");
         elem.setAttribute("src","./img/numeros/fondo.jpg");
@@ -53,6 +53,45 @@
         var ori= document.getElementById(id)
 
         ori.addEventListener("dblclick", function(){cambio(ori);})
+    }
+/*****************************************************************/
+    function obtener_numero(cadena){
+        var pos1= cadena.indexOf("_")+1;
+        var pos2= cadena.indexOf("#");
+        var m= cadena.subtr(pos1, pos2-pos1);
+        return m;
+    }
+
+    function cambio(origen){
+        if(turno){
+            var cadena=origen.id;
+            var m= obtener_numero(cadena);
+            var cadena2="./img/numeros/numero_"+m+".png";
+            origen.src=cadena2;
+            imagen_1=cadena;
+            numero_1=m;
+        }else{
+            var cadena=origen.id;
+            var m= obtener_numero(cadena);
+            var cadena2="./img/numeros/numero_"+m+".png";
+            imagen_2=cadena;
+            origen.src=cadena2;
+            var i1=document.getElementById(imagen_1);
+            var i2=document.getElementById(imagen_2);
+            if(numero_1==m){
+                coincidencias++;
+                document.getElementById("coincidencias").innerHTML=coincidencias;
+                i1.removeEventListener("dblclick",function(){cambio(i1);});
+                i2.removeEventListener("dblclick",function(){cambio(i2);});
+            }else{
+                setTimeout(function(){
+                    i1.src="./img/numeros/fondo.jpg";
+                    i2.src="./img/numeros/fondo.jpg";
+                },500);
+            }
+
+        }
+        turno=!turno;
     }
 </script>
 <body onload="inicial()">
