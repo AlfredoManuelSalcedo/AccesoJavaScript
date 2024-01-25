@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EjercicioGrados</title>
+    <style>
+        #marco{
+            width: 500px;
+            height: 200px;
+            border-radius: 25px;
+            margin: 15px auto;
+            padding: 10px;
+            border: 10px solid gold;
+            text-align: center;
+        }
+        #marco p{
+            margin-left: 40px;
+        }
+        #marco p label{
+            width: 100px;
+       
+        }
+        input{
+            text-align: right;
+        }
+    </style>
+    <script>
+        function redondear(n,nd){
+            //14.5678 2
+            let potencia = Math.pow(10,nd);
+            return (Math.round(n*potencia))/potencia
+
+        }
+
+        function cambio(origen){
+            let VGC;
+            let VGF;
+            let VGK;
+            switch(origen.id){
+                case "GC":
+                    VGC=parseFloat(origen.value);
+                    VGF=((9*VGC)/5)+32;
+                    VGK=VGC+273.15;
+                    break;
+                case "GF":
+                VGF=parseFloat(origen.value);
+                VGC=(5*(VGF-32))/9;
+                VGK= VGC+273.15;
+                    break;
+                case "GK":
+                VGK=parseFloat(origen.value);
+                VGC=VGK-273.15;
+                VGF=((9*VGC)/5)+32;
+                    break;
+            }
+            document.getElementById("GC").value=redondear(VGC,2);
+            document.getElementById("GF").value=redondear(VGF,2);
+            document.getElementById("GK").value=redondear(VGK,2);
+        }
+        function cambiar(quien,lorigen){
+            let numero;
+            if(quien.id!=""){
+                numero = parseInt(quien.value);  
+            }else{
+                numero = parseInt(quien.innerHTML);
+            }
+         
+          let destino = document.getElementById(lorigen);
+          destino.value=parseFloat(destino.value)+numero;
+          cambio(destino);
+        }
+         
+        function cargar(){
+            let vector=["SGC","SGF","SGK"];
+            vector.forEach(item => {
+                fcargar(item); 
+            });
+        }
+        function fcargar(ldestino){
+            let destino=document.getElementById(ldestino);
+            for(let i=100;i>=-100;i-=5){
+                let v = document.createElement("option");
+                v.value=i.toString();
+                v.text=i.toString();
+                if(i==0)v.setAttribute('selected', 'selected');
+                destino.appendChild(v);
+            }
+        }
+    </script>
+</head>
+<body onload="cargar()">
+    <div id="marco">
+       
+            <p>
+                <label for="">Grados Centigrados</label>
+                 <input type="number" onblur="cambio(this)" id="GC" value="0">
+                 <button onclick="cambiar(this,'GC')">+1</button>
+                 <button onclick="cambiar(this,'GC')">-1</button>
+                 <select id="SGC" onchange="cambiar(this,'GC')">
+                 </select>
+            </p> 
+            <p>
+                <label for="">Grados Fahrenheit&nbsp</label>
+                <input type="number" onblur="cambio(this)" id="GF" value="32">
+                <button onclick="cambiar(this,'GF')">+1</button>
+                <button onclick="cambiar(this,'GF')">-1</button>
+                <select id="SGF" onchange="cambiar(this,'GF')">
+                </select>
+            </p>
+            <p>
+                <label for="">Grados Kelvin&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
+                <input type="number" onblur="cambio(this)" id="GK" value="273.15">
+                <button onclick="cambiar(this,'GK')">+1</button>
+                <button onclick="cambiar(this,'GK')">-1</button>
+                <select id="SGK" onchange="cambiar(this,'GK')">
+                </select>
+            </p>
+        
+    </div>
+</body>
+</html>

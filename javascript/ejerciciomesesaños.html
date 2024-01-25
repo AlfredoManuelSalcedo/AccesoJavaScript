@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EjercicioMeses</title>
+    <style>
+         div{
+            margin: 20px auto;
+            padding: 20px;
+            border: 10px solid gold;
+            border-radius: 25px;
+            height: 200px;
+            width: 200px;
+        }
+        select{
+            background-color: #00c3ff;
+            font-size: 25px;
+            color: white;
+            padding: 10px;
+            border-radius: 25px;
+            border-color: aquamarine;
+        }
+        #numero{
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            font-size: 45px;
+            font-weight: bold;
+        }
+        div p{
+            text-align: center;
+        }
+    </style>
+    <script>
+         let meses=["Enero","Febrero","Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
+        function bisisesto(a){
+        if ((a%4==0 && a%100!=0)||(a%400==0)) return true;
+            return false;
+    
+        }
+
+        function inicio(){
+        let hoy= new Date();
+        let mes=hoy.getMonth();
+        let anio=hoy.getFullYear();
+        let destino=document.getElementById("sanios");
+            for (i=anio+25;i>=anio-25;i--){
+                let elem2=document.createElement("option");
+                elem2.value=i.toString();
+                elem2.text=i.toString();
+                if(i==anio){
+                    elem2.setAttribute('selected', 'selected')
+                }
+                destino.appendChild(elem2);
+            }
+/********************************************************************/  
+            destino=document.getElementById("smeses");
+            for(i=0;i<meses.length;i++){
+                let elem2=document.createElement("option");
+                elem2.value=(i+1).toString();
+                elem2.text=meses[i];
+                if(i==mes){
+                    elem2.setAttribute('selected', 'selected');
+                }
+                destino.appendChild(elem2);
+            }
+            dia();
+        }
+
+        function dia(){
+            let vmes=document.getElementById("smeses").value;
+            let vanios=document.getElementById("sanios").value;
+            let destino=document.getElementById("numero");
+            let ndias=30;
+            switch(parseInt(vmes)){
+                case 1: case 3: case 5: case 7: case 8: case 10: case 12:
+                    ndias=31;
+                    break;
+                case 4: case 6: case 9: case 11:
+                    ndias=30
+                    break;
+                default:
+                    ndias=bisisesto(vanios) ? 29 : 28;
+                    break;
+            }
+
+            destino.innerHTML=ndias;
+        }
+    </script>
+</head>
+<body onload="inicio()">
+    <div>
+        <p>
+            <select id="smeses" onchange="dia()"></select>
+         </p>
+         <p>
+            <select id="sanios" onchange="dia()"></select>
+         </p>
+         <p>
+            <label id="numero">0</label>
+         </p>
+    </div>
+</body>
+</html>

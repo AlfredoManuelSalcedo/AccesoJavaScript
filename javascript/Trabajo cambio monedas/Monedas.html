@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+      #marco{
+            width: 470px;
+            height: 200px;
+            border-radius: 25px;
+            margin: 15px auto;
+            padding: 15px;
+            text-align: center;
+            background-color: rgb(164, 197, 226);
+            box-shadow:rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;;
+        }
+        #marco p{
+            margin-left: 40px;
+        }
+        #marco p label{
+            width: 100px;
+        }
+        input{
+            border: #ffffff in set 1px;
+            border-radius: 8px;
+            margin-left: 10px;
+            margin-top: 0px;
+            padding-left: 10PX;
+            width: 70px;
+            text-align: right;
+        }
+        .noll{
+            background-color: rgb(255, 255, 130);
+        }
+        .nulo{
+            background-color: rgb(226, 226, 226);
+        }
+</style>
+<script>
+    var VDE=0.719; var VDY=101.615; var VDL=0.596;
+    var VED=1/VDE; var VYD=1/VDY; var VLD=1/VDL;
+    var VEY= VDY/VDE; var VEL= VDL/VDE; var VYL=VDL/VDY;
+    var VYE = 1/VEY; var VLE= 1/VEL; var VLY= 1/VYL;
+function cambio(VDE,VDY,VDL){
+     VED=1/VDE;  VYD=1/VDY;  VLD=1/VDL;
+     VEY= VDY/VDE;  VEL= VDL/VDE;  VYL=VDL/VDY;
+     VYE = 1/VEY;  VLE= 1/VEL;  VLY= 1/VYL;
+}
+function cargar(){
+ document.getElementById("VDE").value=redondear(VDE,6);
+ document.getElementById("VDY").value=redondear(VDY,6);
+ document.getElementById("VDL").value=redondear(VDL,6);
+ document.getElementById("VED").value=redondear(VED,6);
+ document.getElementById("VYD").value=redondear(VYD,6);
+ document.getElementById("VLD").value=redondear(VLD,6);
+ document.getElementById("VEY").value=redondear(VEY,6);
+ document.getElementById("VEL").value=redondear(VEL,6);
+ document.getElementById("VYL").value=redondear(VYL,6);
+ document.getElementById("VYE").value=redondear(VYE,6);
+ document.getElementById("VLE").value=redondear(VLE,6);
+ document.getElementById("VLY").value=redondear(VLY,6);
+}
+function actualizar(){
+VDE = parseFloat(document.getElementById("VDE").value);
+VDY = parseFloat(document.getElementById("VDY").value);
+VDL = parseFloat(document.getElementById("VDL").value);
+
+cambio(VDE,VDY,VDL)
+cargar()
+}
+function redondear(n,nd){
+            //14.5678 2
+            let potencia = Math.pow(10,nd);
+            return (Math.round(n*potencia))/potencia
+        }
+</script>
+<body onload="cargar()">
+    <div id="marco">
+       <table>
+        <tr>
+            <th></th>
+            <th><img src="gif/usa.gif" alt=""></th>
+            <th><img src="gif/cee.gif" alt=""></th>
+            <th><img src="gif/japon.gif" alt=""></th>
+            <th><img src="gif/ingla.gif" alt=""></th>
+        </tr>
+        <tr>
+            <th></th>
+            <th>DÓLAR</th>
+            <th>EURO</th>
+            <th>YEN</th>
+            <th>LIBRA</th>
+        </tr>
+        <tr>
+            <th>DÓLAR</th>
+            <td><input type="text" class="noll" readonly></td>
+            <td><input type="text" id="VDE" onchange="actualizar()"></td>
+            <td><input type="text" id="VDY" onchange="actualizar()"></td>
+            <td><input type="text" id="VDL" onchange="actualizar()"></td>
+        </tr>
+        <tr>
+            <th>EURO</th>
+            <td><input type="text" readonly class="nulo" id="VED"></td>
+            <td><input type="text" class="noll" readonly class="nulo"></td>
+            <td><input type="text" readonly class="nulo" id="VEY"></td>
+            <td><input type="text" readonly class="nulo" id="VEL"></td>
+        </tr>
+        <tr>
+            <th>YEN</th>
+            <td><input type="text" readonly class="nulo" id="VYD"></td>
+            <td><input type="text" readonly class="nulo" id="VYE"></td>
+            <td><input type="text" class="noll" readonly class="nulo"></td>
+            <td><input type="text" readonly class="nulo" id="VYL"></td>
+        </tr>
+        <tr>
+            <th>LIBRA</th>
+            <td><input type="text" readonly class="nulo" id="VLD"></td>
+            <td><input type="text" readonly class="nulo" id="VLE"></td>
+            <td><input type="text" readonly class="nulo" id="VLY"></td>
+            <td><input type="text" class="noll" readonly class="nulo"></td>
+        </tr>
+       </table>
+    </div>
+</body>
+</html>

@@ -1,0 +1,96 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            margin: 20px auto;
+            padding: 20px;
+            border: 10px solid gold;
+            border-radius: 25px;
+            height: 230px;
+            width: 600px;
+        }
+    
+        div p{
+            text-align: center;
+        }
+        #numero{
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            font-size: 45px;
+            font-weight: bold;
+        }
+        button,select{
+            background-color: #00c3ff;
+            font-size: 25px;
+            color: white;
+            padding: 10px;
+            border-radius: 25px;
+            border-color: aquamarine;
+        }
+    </style>
+  <script>
+    let meses=["Enero","Febrero","Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
+        function sumar(){
+let destino=document.getElementById("numero");
+destino.innerHTML=parseInt(destino.innerHTML)+1;
+        }
+
+        function incrementar(origen){
+            let destino=document.getElementById("numero");
+            destino.innerHTML=parseInt(destino.innerHTML)+parseInt(origen.innerHTML);
+        }
+        function incrementar2(origen){
+            let destino=document.getElementById("numero");
+            destino.innerHTML=parseInt(destino.innerHTML)+parseInt(origen.value);
+        }
+        function inicio(){
+            let destino=document.getElementById("seleccion");
+
+            for (i=100;i>=-100;i-=5){
+                let elem2=document.createElement("option");
+                elem2.value=i.toString();
+                elem2.text=i.toString();
+                destino.appendChild(elem2);
+            }
+            /*************************************************************/ 
+            destino=document.getElementById("smeses");
+            for(i=0;i<meses.length;i++){
+                let elem2=document.createElement("option");
+                elem2.value=(i+1).toString();
+                elem2.text=meses[i];
+                destino.appendChild(elem2);
+            }
+        }
+        function mostrar(origen){
+            alert(origen.value)
+        }
+
+
+  </script>
+</head>
+<body onload="inicio()">
+
+    <div>
+        <p>
+            <button onclick="sumar()" type="button">Presionar el boton</button>
+            <button onclick="incrementar(this)">+5</button>
+            <button onclick="incrementar(this)">-5</button>
+            <button onclick="incrementar(this)">+10</button>
+            <button onclick="incrementar(this)">-10</button>
+            <select id="seleccion" onchange="incrementar2(this)">
+                
+            </select>
+        </p>
+     <p>
+        <label id="numero">0</label>
+     </p>
+     <p>
+        <select id="smeses" onchange="mostrar(this)"></select>
+     </p>
+    </div>
+</body>
+</html>

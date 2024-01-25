@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EjercicioMeses</title>
+    <style>
+         #id1,#id2{
+            margin: 20px auto;
+            padding: 20px;
+            border: 10px solid gold;
+            border-radius: 25px;
+            height: 200px;
+            width: 800px;
+        }
+#id1{
+    width: 300px;
+}
+        select{
+            background-color: #00c3ff;
+            font-size: 25px;
+            color: white;
+            padding: 10px;
+            border-radius: 25px;
+            border-color: aquamarine;
+        }
+       
+        #id1 p{
+            text-align: center;
+        }
+       th,thead{
+background-color: rgb(119, 177, 123);
+color: rgb(253, 253, 253);
+        }
+        table,td{
+background-color: rgb(169, 216, 190);
+        }
+         table caption{
+           background-color: rgba(5, 88, 9, 0.568);
+           color: white;
+           font-size: 30px;
+           font-weight: bolder;
+        }
+        table{
+            width: 350px;
+        }
+        table,tbody,td{
+            text-align: center;
+        }
+    </style>
+    <script>
+         let meses=["Enero","Febrero","Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
+
+        function inicio(){
+        let hoy= new Date();
+        let mes=hoy.getMonth();
+        let anio=hoy.getFullYear();
+        let destino=document.getElementById("sanios");
+            for (i=anio+25;i>=anio-25;i--){
+                let elem2=document.createElement("option");
+                elem2.value=i.toString();
+                elem2.text=i.toString();
+                if(i==anio){
+                    elem2.setAttribute('selected', 'selected')
+                }
+                destino.appendChild(elem2);
+            }
+/********************************************************************/  
+            destino=document.getElementById("smeses");
+            for(i=0;i<meses.length;i++){
+                let elem2=document.createElement("option");
+                elem2.value=(i).toString();
+                elem2.text=meses[i];
+                if(i==mes){
+                    elem2.setAttribute('selected', 'selected');
+                }
+                destino.appendChild(elem2);
+            }
+            dia();
+        }
+
+        function dia(){
+            let vmes=document.getElementById("smeses").value;
+            let vanios=document.getElementById("sanios").value;
+            let destino=document.getElementById("id2");
+            let hoy=new Date(vanios,vmes,1);
+            let pdia= hoy.getDay()==0 ? 7: hoy.getDay();
+            let cadena="<table border='1' align='center'>";
+                cadena+="<caption>"+meses[vmes]+"</caption>";
+                cadena+="<thead><tr><th>L</th><th>M</th><th>X</th><th>J</th><th>V</th><th>S</th><th>D</th></tr></thead>";
+            cadena+="<tbody>"
+                cadena+="<tr>"
+                    for(i=1;i<pdia;i++) cadena +="<td>&nbsp</td>"
+                    inicio_semana=false;
+                    while(hoy.getMonth()==parseInt(vmes)){
+                        if(inicio_semana){
+                            cadena+="<tr>";
+                            inicio_semana=false;
+                        }
+                        
+                        cadena+= "<td>"+hoy.getDate()+"</td>"
+                        if(hoy.getDay()==0){
+                            cadena+="</tr>"
+                            inicio_semana=true
+                        }
+                        hoy.setDate(hoy.getDate() +1);
+                    }
+           
+                    if(hoy.getDay()!=1){
+                        pdia= hoy.getDay()==0 ? 7: hoy.getDay();
+                        for(i=0;i<=7-pdia;i++) cadena +="<td>&nbsp</td>"
+                    }
+                 
+
+                cadena+="</tr>"
+            cadena+="</tbody>"
+            cadena+="</table>"
+            destino.innerHTML =cadena
+        }
+    </script>
+</head>
+<body onload="inicio()">
+    <div id="id1">
+        <p>
+            <select id="smeses" onchange="dia()"></select>
+         </p>
+         <p>
+            <select id="sanios" onchange="dia()"></select>
+         </p>
+         
+    </div>
+    <div id="id2">
+
+    </div>
+
+</body>
+</html>
