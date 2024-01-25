@@ -41,22 +41,24 @@
         for(i=0;i<ocultas.length;i++){
             ocultas[i]="X"
         }
+
         for(i=1;i<=(posi/2);i++){
             for(j=1;j<=2;j++){
                 colocado=true;
                 while(colocado){
-                    n=alea(1,16)-1;
-                if (ocultas[n]=="X"){
-                    ocultad[n]="imagen_"+i+"#"+j;
-                    colocado=false;
-                }
+                        n=alea(1,16)-1;
+                    if (ocultas[n]=="X"){
+                        ocultas[n]="imagen_"+i+"#"+j;
+                        colocado=false;
+                    }
                 }
             }
         }
+    
 
         var destino=document.getElementById("marco1990")
         for(i=0;i<ocultas.length;i++){
-            ponimagen(destino, ocultas[i])
+            ponimagen(destino, ocultas[i]);
         }
     }
     /*****************************************************************/
@@ -76,7 +78,7 @@
     function obtener_numero(cadena){
         var pos1= cadena.indexOf("_")+1;
         var pos2= cadena.indexOf("#");
-        var m= cadena.subtr(pos1, pos2-pos1);
+        var m= cadena.substr(pos1, pos2-pos1);
         return m;
     }
 
@@ -116,5 +118,6 @@
     <div id="marco1990"></div>
     <p id="coincidencias">0</p>
     <p id="prueba"></p>
+
 </body>
 </html>
