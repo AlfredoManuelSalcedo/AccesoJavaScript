@@ -5,7 +5,59 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<body>
-    
+<script>
+    var posi=16;
+    var turno=true;
+    var imagen_1="";
+    var imagen_2="";
+    var numero_1="";
+    var numero_2="";
+    var coincidencias=0;
+    var ocultas= new Array(posi)
+    /*********************************/
+    function alea(li,ls){
+        return Math.floor(Math.random()*(ls-li+1)+li)
+    }
+    /**************************************/
+    function inicial(){
+        for(i=0;i<ocultas.length;i++){
+            ocultas[i]="X"
+        }
+        for(i=1;i<=(posi/2);i++){
+            for(j=1;j<=2;j++){
+                colocado=true;
+                while(colocado){
+                    n=alea(1,16)-1;
+                if (ocultas[n]=="X"){
+                    ocultad[n]="imagen_"+i+"#"+j;
+                    colocado=false;
+                }
+                }
+            }
+        }
+
+        var destino=document.getElementById("marco1990")
+        for(i=0;i<ocultas.length;i++){
+            ponimagen(destino, ocultas[i])
+        }
+
+    }
+    function ponimagen(des,id){
+        var elem = document.createElement("img");
+        elem.setAttribute("src","./img/numeros/fondo.jpg");
+        elem.setAttribute("height", 96);
+        elem.setAttribute("width", 96);
+        elem.setAttribute("id", id);
+        des.appendChild(elem);
+
+        var ori= document.getElementById(id)
+
+        ori.addEventListener("dblclick", function(){cambio(ori);})
+    }
+</script>
+<body onload="inicial()">
+    <div id="marco1990"></div>
+    <p id="coincidencias">0</p>
+    <p id="prueba"></p>
 </body>
 </html>
