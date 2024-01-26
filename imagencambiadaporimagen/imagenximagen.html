@@ -5,15 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+<style>
+    #contenedor{
+        width: 250px;
+        height: 250px;
+        margin: 20px auto;
+        padding: 10px;
+        line-height: 57px;
+    }
+</style>
 <script>
     var turno=true;
     function inicial(){
-        
+        var destino = document.getElementById("contenedor")
+        var elem = document.createElement("img");
+        elem.setAttribute("src","./img/imagen_1.png");
+        elem.setAttribute("height", 200);
+        elem.setAttribute("width", 200);
+        elem.setAttribute("id", "imagenid");
+        destino.appendChild(elem);
+
+        var ori= document.getElementById("imagenid")
+
+        ori.addEventListener("dblclick", function(){cambio_imagen(ori);})
+
+    }
+    function cambio_imagen(origen){
+        if(turno){
+            origen.src="./img/imagen_2.png"
+            turno=!turno
+        }else{
+            origen.src="./img/imagen_1.png"
+            turno=true
+        }
     }
 </script>
 <body onload="inicial()">
-    <div>
-
+    <div id="contenedor">
+        
     </div>
 </body>
 </html>
