@@ -9,24 +9,32 @@
 <script>
     var v=setInterval(function(){temporizador()},1000)
     var w=setInterval(function(){temporizador2()},1000)
-    var diferencia=0
-    function cambiar(){
-        diferencia=parseInt(document.getElementById("paises").value)
-    }
+    
     function temporizador(){
         var d = new Date();
         var t = d.toLocaleTimeString("es-ES");
         document.getElementById("demo").innerHTML=t;
-        var w= new Array();
+
         let c=0;
         [0,1,3,4,6,7].forEach(e => {
             document.getElementById("img"+(++c)).src="./imagenes/"+t[e]+".jpg"
-        });
-       
+        });   
     }
+
+    function temporizador(){
+        var d = new Date();
+        var t = d.toLocaleTimeString("es-ES");
+        document.getElementById("demo").innerHTML=t;
+
+        let c=0;
+        [0,1,3,4,6,7].forEach(e => {
+            document.getElementById("img"+(++c)).src="./imagenes/"+t[e]+".jpg"
+        });   
+    }
+
 </script>
 </head>
-<body onload="cambiar()">
+<body>
     <div id="nuevo">
         <p id="demo"></p>
             <img src="./imagenes/8.jpg" alt="" width="63" height="86" id="img1">
