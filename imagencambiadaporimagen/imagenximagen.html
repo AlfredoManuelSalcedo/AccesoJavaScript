@@ -33,11 +33,10 @@
     function cambio_imagen(origen){
         if(turno){
             origen.src="./img/imagen_2.png"
-            turno=!turno
         }else{
-            origen.src="./img/imagen_1.png"
-            turno=true
+            origen.src="./img/imagen_1.png"          
         }
+        turno=!turno
     }
 </script>
 <body onload="inicial()">
