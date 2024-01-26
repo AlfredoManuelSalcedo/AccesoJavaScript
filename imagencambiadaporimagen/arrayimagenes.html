@@ -8,10 +8,25 @@
 <script>
     var posiciones=6;
     var lista= new Array(posiciones)
-    
+    function inicial() {
+        for(i=0;i<lista.length;i++){
+            lista[i]="./img2/gato_"+i+1+".jpg"
+        }
+        var destino = document.getElementById("marco")
+        ponimagen(destino)
+    }
+    function ponimagen(des){
+        var elem = document.createElement("img");
+        elem.setAttribute("src",lista[0]);
+        elem.setAttribute("height", 96);
+        elem.setAttribute("width", 96);
+        elem.setAttribute("id", "imagen");
+        des.appendChild(elem);
+    }
 </script>
 <body onload="inicial()">
-    <div>
+    <div id="marco">
+       
     </div>
 </body>
 </html>
