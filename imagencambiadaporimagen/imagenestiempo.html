@@ -15,10 +15,14 @@
         elem.setAttribute("width", 96);
         elem.setAttribute("id", "imagen");
         destino.appendChild(elem);
-        
-        elem.addEventListener("click", function(){cambio_imagen(elem);})
-
+        cambio_tiempo(elem)
     }
+  function cambio_tiempo(elemento){
+    setTimeout(() => {
+            cambio_imagen(elemento)
+            cambio_tiempo(elemento)
+       }, 500);
+  }  
   function cambio_imagen(desti){
     if(posiciones<6){
         posiciones+=1
