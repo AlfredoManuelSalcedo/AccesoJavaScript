@@ -39,7 +39,7 @@
        }
 </style>
 <script>
-    function cambiar() {
+    function cambio() {
         var rojo=document.getElementById("r").value
         var verde=document.getElementById("g").value
         var azul=document.getElementById("b").value
@@ -51,15 +51,15 @@
     
     <div id="div1">
         <p>Cambio colores</p>
-        <input type="range" id="r" min="0" max="255" onchange="cambio"/>
+        <input type="range" id="r" min="0" max="255" onchange="cambio()"/>
         <label for="volume">R</label><br>
-        <input type="range" id="g" min="0" max="255" onchange="cambio"/>
+        <input type="range" id="g" min="0" max="255" onchange="cambio()"/>
         <label for="volume">G</label><br>
-        <input type="range" id="b" min="0" max="255" onchange="cambio"/>
+        <input type="range" id="b" min="0" max="255" onchange="cambio()"/>
         <label for="volume">B</label><br>
-        <input type="range" id="a" min="0" max="1" value="0" step="0.1" onchange="cambio"/>
+        <input type="range" id="a" min="0" max="1" value="0" step="0.1" onchange="cambio()"/>
         <label for="volume">A</label><br>
-    </div><br>
+    </div>
     <div id="colores">
     
     </div>
