@@ -46,21 +46,39 @@
         let vverde=parseInt(document.getElementById("g").value);
         let vazul=parseInt(document.getElementById("b").value);
         let valfa=parseInt(document.getElementById("a").value)/10;
-        destino.style.backgroundColor='rgba('+vrojo+','+vverde+','+vazul+','+valfa+')';       
+        destino.style.backgroundColor='rgba('+vrojo+','+vverde+','+vazul+','+valfa+')';
+        document.getElementById("mrojo").innerText=vrojo;
+        document.getElementById("mverde").innerText=vverde;
+        document.getElementById("mazul").innerText=vazul;
+        document.getElementById("malfa").innerText=valfa;
     }
+     
 </script>
 <body onload="cambio()">
     
     <div id="div1">
         <p>Cambio colores</p>
-        <input type="range" id="r" min="0" max="255" onchange="cambio()"/>
-        <label for="rojo">R</label><br>
-        <input type="range" id="g" min="0" max="255" onchange="cambio()"/>
-        <label for="verde">G</label><br>
-        <input type="range" id="b" min="0" max="255" onchange="cambio()"/>
-        <label for="azul">B</label><br>
-        <input type="range" id="a" min="0" max="10" value="0" step="1" onchange="cambio()"/>
-        <label for="alfa">A</label><br>
+        <label for="rojo">R</label>
+        <input type="range" id="r" min="0" max="255" onchange="cambio()" oninput="cambio()"/>
+        <span id="mrojo"></span>
+        <br>
+
+        <label for="verde">G</label>
+        <input type="range" id="g" min="0" max="255" onchange="cambio()" oninput="cambio()"/>
+        <span id="mverde"></span>
+        <br>
+
+        <label for="azul">B</label>
+        <input type="range" id="b" min="0" max="255" onchange="cambio()" oninput="cambio()"/>
+        <span id="mazul"></span>
+        <br>
+
+        <label for="alfa">A</label>
+        <input type="range" id="a" min="0" max="10" value="10" step="1" onchange="cambio()" oninput="cambio()"/>
+        <span id="malfa"></span>
+        <br>
+
+        
     </div>
     <div id="colores">
     </div>
