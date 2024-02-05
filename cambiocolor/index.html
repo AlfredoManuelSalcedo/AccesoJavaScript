@@ -21,8 +21,7 @@
         border: 5px solid rgb(0, 0, 0);
         border-radius: 10px;
         height: 150px;
-        width: 200px;
-        width: 200px;
+        width: 250px;
         height: 100%;
         background-color: #8adaf2;
         margin: 20px auto;
@@ -40,6 +39,34 @@
        }
 </style>
 <script>
+     function inicio2(destino,li,ls){
+        for(j=li;j<=ls;j++){
+            let elem1=document.createElement("option");
+                elem1.value=j;
+                elem1.text=ls==10 ? j/10 : j;
+                destino.appendChild(elem1);
+        }        
+      
+     }   
+    function inicio(){
+        inicio2(document.getElementById("crojo"),0,255);
+        inicio2(document.getElementById("cazul"),0,255);
+        inicio2(document.getElementById("cverde"),0,255);
+        inicio2(document.getElementById("calfa"),0,10);
+
+        document.getElementById("r").addEventListener('change',()=>{cambio();});
+        document.getElementById("r").addEventListener('input',()=>{cambio();});
+
+        document.getElementById("g").addEventListener('change',()=>{cambio();});
+        document.getElementById("g").addEventListener('input',()=>{cambio();});
+
+        document.getElementById("b").addEventListener('change',()=>{cambio();});
+        document.getElementById("b").addEventListener('input',()=>{cambio();});
+
+        document.getElementById("a").addEventListener('change',()=>{cambio();});
+        document.getElementById("a").addEventListener('input',()=>{cambio();});
+        cambio();
+    }
     function cambio() {
         let destino= document.getElementById("colores");
         let vrojo=parseInt(document.getElementById("r").value);
@@ -52,30 +79,31 @@
         document.getElementById("mazul").innerText=vazul;
         document.getElementById("malfa").innerText=valfa;
     }
-     
+     window.addEventListener('load',function(){
+        inicio();
+     })
 </script>
-<body onload="cambio()">
-    
+<body>
     <div id="div1">
         <p>Cambio colores</p>
         <label for="rojo">R</label>
-        <input type="range" id="r" min="0" max="255" onchange="cambio()" oninput="cambio()"/>
-        <span id="mrojo"></span>
+        <input type="range" id="r" min="0" max="255"/>
+        <select id="crojo"></select>
         <br>
 
         <label for="verde">G</label>
-        <input type="range" id="g" min="0" max="255" onchange="cambio()" oninput="cambio()"/>
-        <span id="mverde"></span>
+        <input type="range" id="g" min="0" max="255"/>
+        <select id="cverde"></select>
         <br>
 
         <label for="azul">B</label>
-        <input type="range" id="b" min="0" max="255" onchange="cambio()" oninput="cambio()"/>
-        <span id="mazul"></span>
+        <input type="range" id="b" min="0" max="255"/>
+        <select id="cazul"></select>
         <br>
 
         <label for="alfa">A</label>
-        <input type="range" id="a" min="0" max="10" value="10" step="1" onchange="cambio()" oninput="cambio()"/>
-        <span id="malfa"></span>
+        <input type="range" id="a" min="0" max="10" value="10" step="1"/>
+        <select id="calfa"></select>
         <br>
 
         
