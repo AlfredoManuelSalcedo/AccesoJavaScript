@@ -54,30 +54,70 @@
         inicio2(document.getElementById("cverde"),0,255);
         inicio2(document.getElementById("calfa"),0,10);
 
-        document.getElementById("r").addEventListener('change',()=>{cambio();});
-        document.getElementById("r").addEventListener('input',()=>{cambio();});
+        let rojo=document.getElementById("crojo")
+        let verde=document.getElementById("cverde")
+        let azul=document.getElementById("cazul")
+        let alfa=document.getElementById("calfa")
+        rojo.addEventListener('change',()=>{scambio(rojo);})
+        verde.addEventListener('change',()=>{scambio(verde);})
+        azul.addEventListener('change',()=>{scambio(azul);})
+        alfa.addEventListener('change',()=>{scambio(alfa);})
 
-        document.getElementById("g").addEventListener('change',()=>{cambio();});
-        document.getElementById("g").addEventListener('input',()=>{cambio();});
-
-        document.getElementById("b").addEventListener('change',()=>{cambio();});
-        document.getElementById("b").addEventListener('input',()=>{cambio();});
-
-        document.getElementById("a").addEventListener('change',()=>{cambio();});
-        document.getElementById("a").addEventListener('input',()=>{cambio();});
+        let zrojo=document.getElementById("r")
+        let zverde=document.getElementById("g")
+        let zazul=document.getElementById("b")
+        let zalfa=document.getElementById("a")
+        zrojo.addEventListener('input',()=>{cambio(zrojo);})
+        zverde.addEventListener('input',()=>{cambio(zverde);})
+        zazul.addEventListener('input',()=>{cambio(zazul);})
+        zalfa.addEventListener('input',()=>{cambio(zalfa);})
+        
         cambio();
     }
-    function cambio() {
+    function scambio(quien){
+        let n = quien.value;
+        switch(quien.id){
+            case "crojo":
+                document.getElementById("r").value=n;
+
+                break;
+            case "cverde":
+                document.getElementById("g").value=n;
+                break;
+            case "cazul":
+                document.getElementById("b").value=n;
+                break;
+            case "calfa":
+                document.getElementById("a").value=n;
+                break;
+        }
+        cambio();
+    }
+    function cambio(quien) {
         let destino= document.getElementById("colores");
         let vrojo=parseInt(document.getElementById("r").value);
         let vverde=parseInt(document.getElementById("g").value);
         let vazul=parseInt(document.getElementById("b").value);
         let valfa=parseInt(document.getElementById("a").value)/10;
         destino.style.backgroundColor='rgba('+vrojo+','+vverde+','+vazul+','+valfa+')';
-        document.getElementById("mrojo").innerText=vrojo;
-        document.getElementById("mverde").innerText=vverde;
-        document.getElementById("mazul").innerText=vazul;
-        document.getElementById("malfa").innerText=valfa;
+
+        let n =quien.value;
+        switch(quien.id){
+            case "r":
+                document.getElementById("crojo").selectedIndex=n;
+
+                break;
+            case "g":
+                document.getElementById("cverde").selectedIndex=n;
+                break;
+            case "b":
+                document.getElementById("cazul").selectedIndex=n;
+                break;
+            case "a":
+                document.getElementById("calfa").selectedIndex=n;
+                break;
+        }
+
     }
      window.addEventListener('load',function(){
         inicio();
