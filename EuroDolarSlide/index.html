@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    #marco{
+        width: 200px;
+        height: 150px;
+        background-color: rgb(125, 163, 196);
+        border-radius: 10px;
+        border: 5px solid rgb(0, 0, 0);
+    }
+    #contenedor{
+        display: grid;
+        place-items: center;
+        margin: 0 auto;
+        width: 800px;
+        height: 800px;
+    }
+</style>
+<script>
+    function calculo(){
+        let dolar=document.getElementById("dolar").value
+        let euro=document.getElementById("euro").value
+       
+    }
+    function cambio(item){
+        let destino=document.getElementById("meuro")
+        destino.innerHTML=item.value+"€"
+    }
+
+    function inicio(){
+        let euro=document.getElementById("euro")
+        euro.addEventListener('input',()=>{cambio(euro);})
+        cambio(euro)
+    }
+    
+     window.addEventListener('load',function(){
+        inicio();
+     })
+</script>
+<body>
+    <div id="contenedor">
+        <div id="marco">
+            <input type="range" id="euro" min="0" max="3000"/>
+            <label for="meuro" id="meuro"></label><br><br>
+            <input type="number" id="dolar" value="0.93"/><br><br>
+            <label for="conversion"></label>
+        </div>
+    </div>
+</body>
+</html>
