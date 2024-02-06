@@ -63,10 +63,10 @@
         azul.addEventListener('change',()=>{scambio(azul);})
         alfa.addEventListener('change',()=>{scambio(alfa);})
 
-        let zrojo=document.getElementById("r")
-        let zverde=document.getElementById("g")
-        let zazul=document.getElementById("b")
-        let zalfa=document.getElementById("a")
+        let zrojo=document.getElementById("rojo")
+        let zverde=document.getElementById("verde")
+        let zazul=document.getElementById("azul")
+        let zalfa=document.getElementById("alfa")
         zrojo.addEventListener('input',()=>{cambio(zrojo);})
         zverde.addEventListener('input',()=>{cambio(zverde);})
         zazul.addEventListener('input',()=>{cambio(zazul);})
@@ -76,46 +76,22 @@
     }
     function scambio(quien){
         let n = quien.value;
-        switch(quien.id){
-            case "crojo":
-                document.getElementById("r").value=n;
-                break;
-            case "cverde":
-                document.getElementById("g").value=n;
-                break;
-            case "cazul":
-                document.getElementById("b").value=n;
-                break;
-            case "calfa":
-                document.getElementById("a").value=n;
-                break;
-        }
+        let destino=(quien.id).substring(1);
+        document.getElementById(destino).value=n;
         cambio();
     }
+
     function cambio(quien) {
         let destino= document.getElementById("colores");
-        let vrojo=parseInt(document.getElementById("r").value);
-        let vverde=parseInt(document.getElementById("g").value);
-        let vazul=parseInt(document.getElementById("b").value);
-        let valfa=parseInt(document.getElementById("a").value)/10;
+        let vrojo=parseInt(document.getElementById("rojo").value);
+        let vverde=parseInt(document.getElementById("verde").value);
+        let vazul=parseInt(document.getElementById("azul").value);
+        let valfa=parseInt(document.getElementById("alfa").value)/10;
         destino.style.backgroundColor='rgba('+vrojo+','+vverde+','+vazul+','+valfa+')';
 
         let n =quien.value;
-        switch(quien.id){
-            case "r":
-                document.getElementById("crojo").selectedIndex=n;
-
-                break;
-            case "g":
-                document.getElementById("cverde").selectedIndex=n;
-                break;
-            case "b":
-                document.getElementById("cazul").selectedIndex=n;
-                break;
-            case "a":
-                document.getElementById("calfa").selectedIndex=n;
-                break;
-        }
+        let destino2="c"+quien.id
+        document.getElementById(destino2).selectedIndex=n;
 
     }
      window.addEventListener('load',function(){
@@ -126,22 +102,22 @@
     <div id="div1">
         <p>Cambio colores</p>
         <label for="rojo">R</label>
-        <input type="range" id="r" min="0" max="255"/>
+        <input type="range" id="rojo" min="0" max="255"/>
         <select id="crojo"></select>
         <br>
 
         <label for="verde">G</label>
-        <input type="range" id="g" min="0" max="255"/>
+        <input type="range" id="verde" min="0" max="255"/>
         <select id="cverde"></select>
         <br>
 
         <label for="azul">B</label>
-        <input type="range" id="b" min="0" max="255"/>
+        <input type="range" id="azul" min="0" max="255"/>
         <select id="cazul"></select>
         <br>
 
         <label for="alfa">A</label>
-        <input type="range" id="a" min="0" max="10" value="10" step="1"/>
+        <input type="range" id="alfa" min="0" max="10" value="10" step="1"/>
         <select id="calfa"></select>
         <br>
 
