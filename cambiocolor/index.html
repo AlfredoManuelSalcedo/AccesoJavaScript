@@ -48,16 +48,15 @@
         }        
       
      }   
-    function inicio(){
-        inicio2(document.getElementById("crojo"),0,255);
-        inicio2(document.getElementById("cazul"),0,255);
-        inicio2(document.getElementById("cverde"),0,255);
-        inicio2(document.getElementById("calfa"),0,10);
-
+    function inicio(){   
         let rojo=document.getElementById("crojo")
         let verde=document.getElementById("cverde")
         let azul=document.getElementById("cazul")
         let alfa=document.getElementById("calfa")
+        inicio2(rojo,0,255);
+        inicio2(azul,0,255);
+        inicio2(verde,0,255);
+        inicio2(alfa,0,10);
         rojo.addEventListener('change',()=>{scambio(rojo);})
         verde.addEventListener('change',()=>{scambio(verde);})
         azul.addEventListener('change',()=>{scambio(azul);})
@@ -72,12 +71,14 @@
         zazul.addEventListener('input',()=>{cambio(zazul);})
         zalfa.addEventListener('input',()=>{cambio(zalfa);})
         
-        cambio();
+        cambio(zrojo);
+        cambio(zverde);
+        cambio(zazul);
+        cambio(zalfa);
     }
     function scambio(quien){
-        let n = quien.value;
         let destino=(quien.id).substring(1);
-        document.getElementById(destino).value=n;
+        document.getElementById(destino).value=quien.value;
         cambio();
     }
 
@@ -89,9 +90,8 @@
         let valfa=parseInt(document.getElementById("alfa").value)/10;
         destino.style.backgroundColor='rgba('+vrojo+','+vverde+','+vazul+','+valfa+')';
 
-        let n =quien.value;
         let destino2="c"+quien.id
-        document.getElementById(destino2).selectedIndex=n;
+        document.getElementById(destino2).selectedIndex=quien.value;
 
     }
      window.addEventListener('load',function(){
