@@ -47,6 +47,7 @@
 </style>
 <script>
     var turno=true
+    var turnos=0
     function inicio(){
     var destino = document.getElementById("marco")
     for (i=1;i<=16;i++){
@@ -59,14 +60,26 @@
      }
     }
     function cambio(origen){
-        origen.innerHTML= turno==true ? "X" :"O"
-        turno=!turno
-        origen.id.removeEventListener("click",()=>{cambio(origen);})
+        if(origen.innerHTML==""){
+            origen.innerHTML= turno==true ? "X" :"O"
+            comprobar()
+            turno=!turno
+            turnos+=1
+        }    
+    }
+    function comprobar(){
+        let posibilidades=[[1,2,3,4],[5,6,7,8],[9,10,11,12],[13,14,15,16],[1,5,9,13],[2,6,10,14],[3,7,11,15],[4,8,12,16],[1,6,11,16],[4,7,10,13]]
+        if (turnos!=15){
+
+        }else{
+            alert("EMPATE")
+        }
     }
     function inicial(){
         for (i=1;i<=16;i++){
             destino=document.getElementById("div_"+i)
             destino.innerHTML=""
+            turnos=0
         }
     }
     
