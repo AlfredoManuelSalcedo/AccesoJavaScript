@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4 en raya</title>
+</head>
+<style>
+    #marco{
+        width: 435px;
+        height: 435px;
+        background-color: #94cfe1;
+        margin: 20px auto;
+        padding: 10px;
+        line-height: 57px;
+        margin-bottom: 0px;
+
+    }
+    #marco2{
+        width: 435px;
+        height: 50px;
+        background-color: #94cfe1;
+        margin: 20px auto;
+        padding: 10px;
+        margin-top: 0px;
+        text-align: center;
+    }
+    button{
+        width: 100px;
+        height: 50px;
+    }
+
+    .divs{
+        background-color: rgb(5, 123, 146);
+        width: 100px;
+        height: 100px;
+        margin: 4px;
+        float: left;
+        font-size: 50px;
+        text-align: center;
+        line-height: 90px;
+    }
+    
+</style>
+<script>
+    var posi=16
+    var divs= new Array(posi)
+    function inicio(){
+    var destino = document.getElementById("marco")
+    for (i=0;i<divs.length;i++){
+        divs[i]="div_"+i
+    }
+    for (i=0;i<divs.length;i++){
+        pondivs(destino,divs[i])
+    }
+    }
+
+    function pondivs(des,id){
+        var elem = document.createElement("div");
+        elem.setAttribute("id", id);
+        elem.setAttribute("class", "divs");
+        elem.innerHTML=""
+        des.appendChild(elem);
+
+        var ori= document.getElementById(id)
+
+        ori.addEventListener("dblclick", function(){cambio(ori);})
+    }
+</script>
+<body onload="inicio()">
+    <div id="marco">
+        
+    </div>
+    <div id="marco2">
+            <button id="inicio" onclick="inicial()">INICIAR</button>  
+    </div>
+</body>
+</html>
