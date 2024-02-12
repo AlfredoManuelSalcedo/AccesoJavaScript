@@ -26,8 +26,10 @@
         text-align: center;
     }
     button{
-        width: 100px;
+        width: 250px;
         height: 50px;
+        font-size: 25px;
+        border-radius: 20px;
     }
 
     .divs{
@@ -36,38 +38,41 @@
         height: 100px;
         margin: 4px;
         float: left;
-        font-size: 50px;
+        font-size: 70px;
         text-align: center;
-        line-height: 90px;
+        line-height: 100px;
+        border-radius: 10px;
     }
     
 </style>
 <script>
-    var posi=16
-    var divs= new Array(posi)
+    var turno=true
     function inicio(){
     var destino = document.getElementById("marco")
-    for (i=0;i<divs.length;i++){
-        divs[i]="div_"+i
-    }
-    for (i=0;i<divs.length;i++){
-        pondivs(destino,divs[i])
-    }
-    }
-
-    function pondivs(des,id){
-        var elem = document.createElement("div");
-        elem.setAttribute("id", id);
+    for (i=1;i<=16;i++){
+        let elem = document.createElement("div");
+        elem.setAttribute("id", "div_"+i);
         elem.setAttribute("class", "divs");
         elem.innerHTML=""
-        des.appendChild(elem);
-
-        var ori= document.getElementById(id)
-
-        ori.addEventListener("dblclick", function(){cambio(ori);})
+        elem.addEventListener("click",()=>{cambio(elem);})
+        destino.appendChild(elem);
+     }
     }
+    function cambio(origen){
+        origen.innerHTML= turno==true ? "X" :"O"
+        turno=!turno
+        origen.id.removeEventListener("click",()=>{cambio(origen);})
+    }
+    function inicial(){
+        for (i=1;i<=16;i++){
+            destino=document.getElementById("div_"+i)
+            destino.innerHTML=""
+        }
+    }
+    
+    window.addEventListener("load",()=>{inicio();})
 </script>
-<body onload="inicio()">
+<body>
     <div id="marco">
         
     </div>
