@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+    function inicio(){
+        let nfc=4;
+        let filas =(nfc*2)+2
+        let tb=new Array(filas)
+        for(i=0;i<filas;i++){
+            tb[i]= new Array(nfc)
+        }
+        let c=0
+        for(let i=0;i<nfc;i++){
+            for(let j=0;j<nfc;j++){
+                tb[c][j]=(i*nfc)+(j+1)
+                tb[c+nfc][j]=(j*nfc)+(i+1)
+            }
+            c++;
+        }
+        c=(nfc*2)
+        for(let i=0;i<nfc;i++){
+            tb[c][i]=(i*nfc)+(i+1)
+            tb[c+1][i]=(i*nfc)+(nfc-1)
+        }
+        console.log(tb)
+    }
+    window.addEventListener("load",()=>{inicio();})
+</script>
+<body>
+    
+</body>
+</html>
