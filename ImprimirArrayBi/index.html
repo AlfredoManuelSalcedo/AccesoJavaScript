@@ -7,19 +7,20 @@
 </head>
 <style>
     .conte{
-        width: 500px;
-        height: 500px;
+        width: 550px;
+        height: 550px;
         display: grid;
         place-items: center;
         margin: 0 auto;
     }
     .cont{
         background-color: rgb(240, 218, 129);
-        width: 500px;
-        height: 500px;
+        width: 550px;
+        height: 550px;
         border-radius: 50px;
         padding: 20px;
         text-align: center;
+        margin: 5px;
     }
     body{
         background-color: rgb(190, 244, 244);
@@ -63,19 +64,19 @@
             tb[c][i]=(i*nfc)+(i+1)
             tb[c+1][i]=(i*nfc)+(nfc-1)
         }
-        document.getElementById("cont").innerHTML=dime()
-        console.log(tb)
+        document.getElementById("marco").innerHTML=dime()
     }
 
     function dime(){
-        let cadena="<table>";
-            for(let i=0;i<tb.length;i++){
-                cadena+="<tr>";
-                for(let j=0;j<tb[i].length;j++){
-                    cadena+="<td>"+tb[i][j]+"</td>"
-                }
-                cadena+="</tr>"
+        let cadena="<table align='center' border=1>";
+            for(let i=0;i<tb.length;i++) {
+                cadena +="<tr>";
+            for(let j=0;j<tb[i].length;j++) {
+                cadena +="<td>"+tb[i][j ]+"</td>";
             }
+            cadena +="</tr>";
+ 
+        }
             cadena +="</table>";
         return cadena;
     }
@@ -83,8 +84,8 @@
 </script>
 <body>
     <div class="conte">
-        <div class="cont">
-            <select id="numfc" onchange="cambio()"></select>
+        <select id="numfc" onchange="cambio()"></select>
+        <div class="cont" id="marco">
         </div>
     </div>
     
