@@ -42,6 +42,8 @@
                 elem2.text=i;
                 destino.appendChild(elem2);
             }
+        destino.addEventListener("change",()=>{cambio();})
+        cambio();
     }
 
     function cambio(){
@@ -84,7 +86,7 @@
 </script>
 <body>
     <div class="conte">
-        <select id="numfc" onchange="cambio()"></select>
+        <select id="numfc"></select>
         <div class="cont" id="marco">
         </div>
     </div>
