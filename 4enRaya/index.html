@@ -46,69 +46,83 @@
     
 </style>
 <script>
-    var turno=true
-    var turnos=0
-    function inicio(){
-    var destino = document.getElementById("marco")
-    for (i=1;i<=16;i++){
-        let elem = document.createElement("div");
-        elem.setAttribute("id", "div_"+i);
-        elem.setAttribute("class", "divs");
-        elem.innerHTML=""
-        elem.addEventListener("click",()=>{cambio(elem);})
-        destino.appendChild(elem);
-     }
-    }
-    function cambio(origen){
-        if(origen.innerHTML==""){
-            origen.innerHTML= turno==true ? "X" :"O"
-            //comprobar()
-            turno=!turno
-            turnos+=1
-        }    
-    }
-    function comprobar(){
+    var turno = true;
+    var turnos = 0;
 
-       console.log(posibilidad)
-        if (turnos!=15){
-
-        }else{
-            alert("EMPATE")
-        }
-    }
-    function inicial(){
-        for (i=1;i<=16;i++){
-            destino=document.getElementById("div_"+i)
-            destino.innerHTML=""
-            turnos=0
+    function inicio() {
+        var destino = document.getElementById("marco");
+        for (let i = 1; i <= 16; i++) {
+            let elem = document.createElement("div");
+            elem.setAttribute("id", "div_" + i);
+            elem.setAttribute("class", "divs");
+            elem.innerHTML = "";
+            elem.addEventListener("click", () => { cambio(elem); });
+            destino.appendChild(elem);
         }
     }
 
-    function fPosibilidades(){
-        let nfc=4;
-        let filas =(nfc*2)+2
-        let posibilidades=new Array(filas)
-        for(i=0;i<filas;i++){
-            posibilidades[i]= new Array(nfc)
+    function cambio(origen) {
+        if (origen.innerHTML == "") {
+            origen.innerHTML = turno == true ? "X" : "O";
+            turno = !turno;
+            turnos += 1;
+            comprobar();
         }
-        let c=0
-        for(i=0;i<nfc;i++){
-            for(j=0;j<nfc;j++){
-                posibilidades[c][j]=(i*nfc)+(j+1)
-                posibilidades[c+nfc][j]=(j*nfc)+(i+1)
+    }
+
+    function comprobar() {
+    let posibilidades = fPosibilidades();
+    for (let combinacion of posibilidades) {
+        let primerValor = document.getElementById("div_" + combinacion[0]).innerHTML;
+        let ganador = true;
+        for (let pos of combinacion) {
+            if (document.getElementById("div_" + pos).innerHTML !== primerValor) {
+                ganador = false;
+                break;
             }
-            c++
         }
-        c=(nfc*2)
-        for(let i=0;i<nfc;i++){
-            posibilidades[c][i]=(i*nfc)+(i+1)
-            posibilidades[c+1][i]=(i*nfc)+(nfc-1)
+        if (primerValor && ganador) {
+            alert(primerValor+" ha ganado");
+            return;
         }
-         return posibilidades
-
     }
-    
-    window.addEventListener("load",()=>{inicio();})
+    if (turnos === 16) {
+        alert("EMPATE");
+    }
+    }      
+
+    function inicial() {
+        for (let i = 1; i <= 16; i++) {
+            destino = document.getElementById("div_" + i);
+            destino.innerHTML = "";
+            turnos = 0;
+        }
+    }
+
+    function fPosibilidades() {
+        let nfc = 4;
+        let filas = (nfc * 2) + 2;
+        let posibilidades = new Array(filas);
+        for (let i = 0; i < filas; i++) {
+            posibilidades[i] = new Array(nfc);
+        }
+        let c = 0;
+        for (let i = 0; i < nfc; i++) {
+            for (let j = 0; j < nfc; j++) {
+                posibilidades[c][j] = (i * nfc) + (j + 1);
+                posibilidades[c + nfc][j] = (j * nfc) + (i + 1);
+            }
+            c++;
+        }
+        c = (nfc * 2);
+        for (let i = 0; i < nfc; i++) {
+            posibilidades[c][i] = (i * nfc) + (i + 1);
+            posibilidades[c + 1][i] = (i * nfc) + (nfc - 1);
+        }
+        return posibilidades;
+    }
+
+    window.addEventListener("load", () => { inicio(); });
 </script>
 <body>
     <div id="marco">
