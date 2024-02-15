@@ -48,6 +48,7 @@
 <script>
     var turno = true;
     var turnos = 0;
+    var juegoFin= false
 
     function inicio() {
         var destino = document.getElementById("marco");
@@ -59,10 +60,11 @@
             elem.addEventListener("click", () => { cambio(elem); });
             destino.appendChild(elem);
         }
+        juegoFin=false
     }
 
     function cambio(origen) {
-        if (origen.innerHTML == "") {
+        if (!juegoFin&&origen.innerHTML == "") {
             origen.innerHTML = turno == true ? "X" : "O";
             turno = !turno;
             turnos += 1;
@@ -73,21 +75,23 @@
     function comprobar() {
     let posibilidades = fPosibilidades();
     for (let combinacion of posibilidades) {
-        let primerValor = document.getElementById("div_" + combinacion[0]).innerHTML;
+        let valor = document.getElementById("div_" + combinacion[0]).innerHTML;
         let ganador = true;
         for (let pos of combinacion) {
-            if (document.getElementById("div_" + pos).innerHTML !== primerValor) {
+            if (document.getElementById("div_" + pos).innerHTML !== valor) {
                 ganador = false;
                 break;
             }
         }
-        if (primerValor && ganador) {
-            alert(primerValor+" ha ganado");
+        if (valor && ganador) {
+            alert(valor+" HA GANADO");
+            juegoFin=true
             return;
         }
     }
-    if (turnos === 16) {
+    if (turnos == 16) {
         alert("EMPATE");
+        juegoFin=true
     }
     }      
 
@@ -97,6 +101,7 @@
             destino.innerHTML = "";
             turnos = 0;
         }
+        juegoFin=false
     }
 
     function fPosibilidades() {
