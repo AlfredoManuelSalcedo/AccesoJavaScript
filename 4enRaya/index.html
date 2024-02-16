@@ -49,10 +49,11 @@
     var turno = true;
     var turnos = 0;
     var juegoFin= false
+    var ndivs=16
 
     function inicio() {
         var destino = document.getElementById("marco");
-        for (let i = 1; i <= 16; i++) {
+        for (let i = 1; i <= ndivs; i++) {
             let elem = document.createElement("div");
             elem.setAttribute("id", "div_" + i);
             elem.setAttribute("class", "divs");
