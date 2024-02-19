@@ -28,14 +28,18 @@
     }
 </style>
 <script>
-function cambio(quien) {
-        console.log(quien)
+function cargar(quien) {
+        cambio()
     }
 
-    function cargar(){
+    function cambio(){
+        let destino= document.getElementById("marco")
         let seleccion=document.getElementsByName("colores")
         for(let i =0;i<seleccion.length;i++){
-           i.addEventListener('change',()=>{cambio(i)})
+           seleccion[i].addEventListener('change',()=>{cambio()})
+           if(seleccion[i].checked==true){
+            destino.style.backgroundColor=seleccion[i].value
+           }
         }
         
     }
