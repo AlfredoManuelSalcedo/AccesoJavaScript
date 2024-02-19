@@ -35,7 +35,6 @@ function cambio(quien) {
     }
 
     function cargar(){
-        let destino= document.getElementById("marco")
         let seleccion=document.getElementsByName("colores")
         for(let i =0;i<seleccion.length;i++){
             seleccion[i].addEventListener('change',()=>{cambio(seleccion[i])})
