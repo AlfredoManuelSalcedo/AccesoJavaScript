@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    #marco{
+        width: 435px;
+        height: 435px;
+        background-color: #94cfe1;
+        margin: 20px auto;
+        padding: 10px;
+        line-height: 57px;
+        margin-bottom: 0px;
+        border-radius: 50px;
+        box-shadow: 37px 46px 120px -25px rgba(0,0,0,0.52);
+    }
+    body{
+        background-color: #cceaf3;
+    }
+
+    #marco2{
+    margin: 0 auto;
+    align-items: center;
+    width: 500px;
+    }
+</style>
+<script>
+function cambio(quien) {
+    let destino= document.getElementById("marco")
+    console.log(quien.value)
+    destino.style.backgroundColor=quien.value
+    }
+
+    function cargar(){
+        let destino= document.getElementById("marco")
+        let seleccion=document.getElementsByName("colores")
+        for(let i =0;i<seleccion.length;i++){
+            seleccion[i].addEventListener('change',()=>{cambio(seleccion[i])})
+        }
+        
+    }
+    window.addEventListener('load',()=>{cargar()})
+</script>
+<body>
+    <div id="marco2">
+        <fieldset>
+            <legend>COLORES</legend>
+            <input type="radio" name="colores" value="red"><label for="rojo">Rojo</label>
+            <input type="radio" name="colores" value="green"><label for="verde">Verde</label>
+            <input type="radio" name="colores" value="blue"><label for="azul">Azul</label>
+            <input type="radio" name="colores" value="orange"><label for="naranja">Naranja</label>
+            <input type="radio" name="colores" value="pink"><label for="rosa">Rosa</label>
+            <input type="radio" name="colores" value="black"><label for="negro">Negro</label>
+            <input type="radio" name="colores" value="white"><label for="blanco">Blanco</label>
+        </fieldset>
+    </div>
+    <div id="marco"></div>
+</body>
+</html>
