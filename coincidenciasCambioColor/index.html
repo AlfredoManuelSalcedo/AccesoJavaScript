@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .conte{
+        width: 95%;
+        height: 90vh;
+        display: grid;
+        place-items: center;
+        margin: 0 auto;
+        border: 5px solid;
+        border-color: rgb(189, 42, 42);
+    }
+    .cont{
+        width: 100px;
+        height: 100px;
+        background-color: rgb(240, 218, 129);
+        border-radius: 50px;
+        align-items: center;
+        margin: 0 auto;
+        margin-top: 5%;
+        border-color: black;
+        border: 1px solid;
+    }
+    body{
+        background-color: rgb(190, 244, 244);
+    }
+    .divs{
+        background-color: rgb(5, 123, 146);
+        width: 100px;
+        height: 100px;
+        margin: 4px;
+        float: left;
+        font-size: 70px;
+        text-align: center;
+        line-height: 100px;
+        border-radius: 10px;
+    }
+</style>
+<script>
+    var nfc=4;
+    var filas =(nfc*2)+2
+    var tb=new Array(filas)
+    for(i=0;i<filas;i++){
+        tb[i]= new Array(nfc)
+    }
+    
+function inicio(){
+    let destino=document.getElementById("numfc");
+        for (i=3;i<=10;i++){
+            let elem2=document.createElement("option");
+            elem2.value=i;
+            elem2.text=i;
+            destino.appendChild(elem2);
+        }
+    destino.addEventListener("change",()=>{cambio();})
+    width()
+    cambio();
+}
+
+function cambio(){
+    nfc=parseInt(document.getElementById("numfc").value)
+    filas =(nfc*2)+2
+    let c=0
+    var destino = document.getElementById("marco");
+    if(destino !== null){
+                while (destino.hasChildNodes()){
+                     destino.removeChild(destino.lastChild);
+                }
+                let columnTemplate = '';
+            }
+    for (let i = 1; i <= nfc*nfc; i++) {
+            let elem = document.createElement("div");
+            elem.setAttribute("id", "div_" + i);
+            elem.setAttribute("class", "divs");
+            elem.innerHTML = "";
+            elem.addEventListener("click", () => { cambio(elem); });
+            destino.appendChild(elem);
+        }
+    width()
+}
+
+function width() {
+            const el = document.getElementById('marco');
+            if (nfc<6){
+                el.style.cssText ='width: '+((nfc*100)+100)+'px;';
+            }else if(nfc==9) {
+                el.style.cssText ='width: '+((nfc*100)+400)+'px;';
+            }
+            else{
+                el.style.cssText ='width: '+((nfc*100)+150)+'px;';  
+            } 
+        }
+
+window.addEventListener("load",()=>{inicio();})
+</script>
+<body>
+    <div class="conte">
+        <select id="numfc"></select>
+        <div class="cont" id="marco">
+            <div id="marco"></div>
+        </div>
+    </div>
+</body>
+</html>
