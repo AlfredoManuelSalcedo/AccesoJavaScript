@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Juego de Coincidencias</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+
+    #game-container {
+      display: grid;
+      grid-template-columns: repeat(4, 100px);
+      gap: 10px;
+      margin: 20px auto;
+    }
+
+    .card {
+      width: 100px;
+      height: 100px;
+      background-color: #ccc;
+      border: 1px solid #999;
+      cursor: pointer;
+    }
+
+    #message {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    #turn-counter {
+      margin-top: 10px;
+      font-size: 16px;
+    }
+
+    #start-button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<div id="game-container"></div>
+<div id="message"></div>
+<div id="turn-counter">Turno: 0</div>
+<button id="start-button" onclick="startGame()">Empezar Partida</button>
+
+<script>
+  let cards = [];
+  let flippedCards = [];
+  let turns = 0;
+
+  function createGame() {
+    let colors = ["red", "blue", "green", "yellow", "purple", "orange", "pink", "brown", "red", "blue", "green", "yellow", "purple", "orange", "pink", "brown"];
+    colors = shuffleArray(colors);
+
+    const gameContainer = document.getElementById("game-container");
+    gameContainer.innerHTML = "";
+
+    for (let i = 0; i < 16; i++) {
+      const card = document.createElement("div");
+      card.className = "card";
+      card.dataset.color = colors[i];
+      card.addEventListener("click", flipCard);
+      gameContainer.appendChild(card);
+      cards.push(card);
+    }
+  }
+
+  function flipCard() {
+    const card = this;
+
+    if (flippedCards.length < 2 && !flippedCards.includes(card)) {
+      card.style.backgroundColor = card.dataset.color;
+      flippedCards.push(card);
+
+      if (flippedCards.length === 2) {
+        setTimeout(checkMatch, 500);
+        turns++;
+        updateTurnCounter();
+      }
+    }
+  }
+
+  function checkMatch() {
+    const [card1, card2] = flippedCards;
+    
+    if (card1.dataset.color === card2.dataset.color) {
+      // Match
+      card1.removeEventListener("click", flipCard);
+      card2.removeEventListener("click", flipCard);
+
+      if (document.querySelectorAll('.card:not([style*="background-color"])').length === 0) {
+        document.getElementById("message").innerText = "¡Enhorabuena, has completado el juego!";
+      }
+    } else {
+      // No match
+      card1.style.backgroundColor = "#ccc";
+      card2.style.backgroundColor = "#ccc";
+    }
+
+    flippedCards = [];
+  }
+
+  function updateTurnCounter() {
+    document.getElementById("turn-counter").innerText = `Turno: ${turns}`;
+  }
+
+  function startGame() {
+    cards = [];
+    flippedCards = [];
+    turns = 0;
+    document.getElementById("message").innerText = "";
+    createGame();
+    updateTurnCounter();
+  }
+
+  function shuffleArray(array) {
+    const shuffledArray = [...array];
+    for (let i = shuffledArray.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
+    }
+    return shuffledArray;
+  }
+
+  // Inicializar el juego al cargar la página
+  createGame();
+</script>
+
+</body>
+</html>
