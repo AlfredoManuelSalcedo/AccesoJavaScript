@@ -39,6 +39,16 @@
         text-align: center;
         height: 100px;
     }
+    #reinicio{
+        background-color: #04AA6D;
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+    }
 </style>
 <script>
     var nfc = 4;
@@ -46,9 +56,11 @@
     var colores = generateColors(nfc);
     var seleccionados = [];
     var punto=-1;
+    var juegoFin=false;
 
     function inicio() {
         let destino = document.getElementById("numfc");
+        let boton=document.getElementById("reinicio")
         for (i = 2; i <= 10; i++) {
             if(i%2==0){
             let elem2 = document.createElement("option");
@@ -59,11 +71,13 @@
             
         }
         destino.addEventListener("change", () => { cambio(); })
+        boton.addEventListener("click", () => { cambio(); })
         width();
         cambio();
     }
 
     function cambio() {
+    punto=-1;
     let nuevoNfc = parseInt(document.getElementById("numfc").value);
     if (nuevoNfc !== nfc) {
         punto = -1;
@@ -91,12 +105,15 @@
         destino.appendChild(elem);
     }
     width();
+    juegoFin=false;
 }
 
     function seleccionarColor(div) {
-        let id = div.id.split("_")[1];
+        if(!juegoFin){
+            let id = div.id.split("_")[1];
         div.style.backgroundColor = colores[id - 1];
         seleccionados.push(div);
+        div.removeEventListener("click", () => { seleccionarColor(div); });
         if (seleccionados.length === 2) {
             setTimeout(() => {
                 if (seleccionados[0].style.backgroundColor === seleccionados[1].style.backgroundColor) {
@@ -104,10 +121,12 @@
                 } else {
                     seleccionados.forEach(d => {
                         d.style.backgroundColor = "#057b92";
+                        d.addEventListener("click", () => { seleccionarColor(d); });
                     });
                 }
                 seleccionados = [];
             }, 500);
+        }
         }
     }
 
@@ -117,10 +136,14 @@
         if (parejasTexto) {
             parejasTexto.textContent = "Parejas encontradas: " + punto;
         }
-        if (punto==parseInt(document.getElementById("numfc").value)){
-            alert("GANASTE")
+        let totalParejas = (nfc * nfc) / 2;
+
+        if (punto === totalParejas) {
+            alert("GANASTE");
+            juegoFin = true;
         }
     }
+    
 
     function generateColors(n) {
         let colors = [];
@@ -159,6 +182,7 @@
             <div id="marco"></div>
         </div>
         <p id="parejasTexto">Parejas encontradas: 0</p>
+        <button id="reinicio">REINICIO</button>
     </div>
 </body>
 </html>
