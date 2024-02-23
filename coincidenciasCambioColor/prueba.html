@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .conte{
+        width: 95%;
+        height: 90vh;
+        display: grid;
+        place-items: center;
+        margin: 0 auto;
+    }
+    .cont{
+        background-color: rgb(240, 218, 129);
+        text-align: center;
+        padding-left: 70px;
+        border-radius: 50PX;
+        padding-top: 70px ;
+        padding-bottom: 70px;
+    }
+    body{
+        background-color: rgb(190, 244, 244);
+    }
+    .divs{
+        background-color: #057b92;
+        width: 100px;
+        height: 100px;
+        float: left;
+        margin: 5px;
+        font-size: 70px;
+        text-align: center;
+        line-height: 100px;
+        border-radius: 10px;
+    }
+    #marco{
+        text-align: center;
+        height: 100px;
+    }
+</style>
+<script>
+    var nfc = 4;
+    var filas = (nfc * 2) + 2;
+    var colores = generateColors(nfc);
+    var seleccionados = [];
+    var punto=-1;
+
+    function inicio() {
+        let destino = document.getElementById("numfc");
+        for (i = 2; i <= 10; i++) {
+            if(i%2==0){
+            let elem2 = document.createElement("option");
+            elem2.value = i;
+            elem2.text = i;
+            destino.appendChild(elem2);
+            }
+            
+        }
+        destino.addEventListener("change", () => { cambio(); })
+        width();
+        cambio();
+    }
+
+    function cambio() {
+    let nuevoNfc = parseInt(document.getElementById("numfc").value);
+    if (nuevoNfc !== nfc) {
+        punto = -1;
+    }
+    nfc = nuevoNfc;
+    filas = (nfc * 2) + 2;
+    let c = 0;
+    var destino = document.getElementById("marco");
+    if (destino !== null) {
+        while (destino.hasChildNodes()) {
+            destino.removeChild(destino.lastChild);
+        }
+    }
+
+    colores = generateColors(nfc);
+    seleccionados = [];
+    cambiarTexto();
+
+    for (let i = 1; i <= nfc * nfc; i++) {
+        let elem = document.createElement("div");
+        elem.setAttribute("id", "div_" + i);
+        elem.setAttribute("class", "divs");
+        elem.innerHTML = "";
+        elem.addEventListener("click", () => { seleccionarColor(elem); });
+        destino.appendChild(elem);
+    }
+    width();
+}
+
+    function seleccionarColor(div) {
+        let id = div.id.split("_")[1];
+        div.style.backgroundColor = colores[id - 1];
+        seleccionados.push(div);
+        if (seleccionados.length === 2) {
+            setTimeout(() => {
+                if (seleccionados[0].style.backgroundColor === seleccionados[1].style.backgroundColor) {
+                    cambiarTexto();
+                } else {
+                    seleccionados.forEach(d => {
+                        d.style.backgroundColor = "#057b92";
+                    });
+                }
+                seleccionados = [];
+            }, 500);
+        }
+    }
+
+    function cambiarTexto() {
+        punto=punto+1
+        let parejasTexto = document.getElementById("parejasTexto");
+        if (parejasTexto) {
+            parejasTexto.textContent = "Parejas encontradas: " + punto;
+        }
+        if (punto==parseInt(document.getElementById("numfc").value)){
+            alert("GANASTE")
+        }
+    }
+
+    function generateColors(n) {
+        let colors = [];
+        for (let i = 0; i < n * n / 2; i++) {
+            let color = '#' + Math.floor(Math.random() * 16777215).toString(16);
+            colors.push(color, color);
+        }
+        return arrayRandom(colors);
+    }
+
+    function arrayRandom(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+    function width() {
+        const el = document.getElementById('marco');
+        if (nfc < 6) {
+            el.style.cssText = 'width: ' + ((nfc * 100) + 100) + 'px;';
+        } else if (nfc == 9) {
+            el.style.cssText = 'width: ' + ((nfc * 100) + 100) + 'px;';
+        } else {
+            el.style.cssText = 'width: ' + ((nfc * 100) + 150) + 'px;';
+        }
+    }
+
+    window.addEventListener("load", () => { inicio(); })
+</script>
+<body>
+    <div class="conte">
+        <select id="numfc"></select>
+        <div class="cont">
+            <div id="marco"></div>
+        </div>
+        <p id="parejasTexto">Parejas encontradas: 0</p>
+    </div>
+</body>
+</html>
