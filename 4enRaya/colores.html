@@ -76,7 +76,6 @@ function comprobar() {
     console.log(posibilidades)
     for (let combinacion of posibilidades) {
         let valor = document.getElementById("div_" + combinacion[0]).innerHTML;
-        let color=document.getElementById("div_"+ combinacion[0]).style.backgroundColor;
         let ganador = true;
         for (let pos of combinacion) {
             if (document.getElementById("div_" + pos).innerHTML !== valor) {
