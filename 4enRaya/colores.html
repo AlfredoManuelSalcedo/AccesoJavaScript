@@ -3,226 +3,139 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>    
+    <title>Document</title>
 </head>
 <style>
-    body{
-    background-color: rgb(94, 97, 100);
-}
-.general-container{
-    place-items: center;
-    width: 100%;
-    height: 95vh;
-    display:grid;
-}
-#container{
-    display:flex;
-    margin-top: -15%;
-    place-items: center;     
-    margin-bottom: -15%;             
-}
-.contenido{
-    background-color: rgb(221, 209, 209);
-    width: 450px;
-    height: 450px;
-    border-radius: 35px;
-    padding: 25px;
-    box-shadow: 0px 0px 23px 0px rgba(0,0,0,0.75);
-    margin: 15px;
-}
-#juego{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-#idSelect{
-    width: 50px;
-    text-align: center;
-}
-.casillas{
-    background-color: rgb(209, 193, 193);
-    width: 45px;
-    height: 45px;
-    text-align: center;
-    margin: 5px;
-    border-radius: 25px;
-    box-shadow: inset 0px 0px 31px 1px rgba(22, 22, 22, 0.75);
-}
-.casillas:hover{
-    background-color: rgb(119, 115, 115);
-    cursor: pointer;
-}
-p{
- font-size: 35px;
- color: whitesmoke;   
-}
-#idSelect{
-    font-size: 15px;
-    width: 70px;
-    height: 30px;
-    border-radius: 25px;
-}
-#idSelect:hover{
-    cursor: pointer;
-}
-.ctd{
-    background-color: white;
-}
-.posibilidades{
-    background-color: rgb(255, 255, 255);
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    border-collapse: collapse;
-}
-.std{
-    width: 25px;
-    height: 20px;
-}
+    #marco{
+        width: 435px;
+        height: 435px;
+        background-color: #94cfe1;
+        margin: 20px auto;
+        padding: 10px;
+        line-height: 57px;
+        margin-bottom: 0px;
+
+    }
+    #marco2{
+        width: 435px;
+        height: 50px;
+        background-color: #94cfe1;
+        margin: 20px auto;
+        padding: 10px;
+        margin-top: 0px;
+        text-align: center;
+    }
+    button{
+        width: 250px;
+        height: 50px;
+        font-size: 25px;
+        border-radius: 20px;
+    }
+
+    .divs{
+        background-color: #057b92;
+        width: 100px;
+        height: 100px;
+        margin: 4px;
+        float: left;
+        font-size: 0px;
+        text-align: center;
+        line-height: 100px;
+        border-radius: 10px;
+    }
 </style>
 <script>
-    var posibilidades="";
-var nfc;
-var filas;
-var juegoFin=true;
-var turno = true;
-//LO QUE INICIA NADA MAS CARGAR AL PAGINA
-function cargar(){
-    fContenido();
-    cambio_soluciones();
-    cambio_juego();
-}
-//CREACION DEL SELECT Y LAS OPTION DE DENTRO
-function fContenido(){
-    let elem = document.getElementById("idSelect");     
-    for(let i = 3;i<=8;i++){
-        let elem2 = document.createElement("option");
-        elem2.text=i;
-        elem2.value=i;
-        elem.appendChild(elem2);
-    }
-
-//AÑADIENDO EVENTOS A LOS OPTION
-    elem.addEventListener("change",()=>{cambio_soluciones();});
-    elem.addEventListener("change",()=>{cambio_juego();});
-}
-
-//CREACION DEL ARRAY DE LAS POSIBLES SOLUCIONES
-function cambio_soluciones(){
-    nfc=parseInt(document.getElementById("idSelect").value)
-    filas=(nfc*2)+2;
-    let q=0;
-    posibilidades=new Array(filas);
-    for(i=0;i<filas;i++){
-        posibilidades[i]=new Array(nfc);
-    }
-    for(let i=0;i<nfc;i++){
-        for(let j=0;j<nfc;j++){
-            posibilidades[q][j]=(i*nfc)+(j+1);
-            posibilidades[q+nfc][j]=(j*nfc)+(i+1);
-        }
-        q++
-    }
-    q = (nfc*2);
-
-    for(let i=0;i<nfc;i++){
-        posibilidades[q][i]=(i*nfc)+(i+1);
-        posibilidades[q+1][i]= (i*nfc) + (nfc-i);
-
-    }
-    document.getElementById("soluciones").innerHTML=dime();
-}
-
-//PINTA LAS SOLUCIONES EN UNA TABLA
-function dime(){
-    let cadena="<table align='center' border=1 class=posibilidades>";
-        let v=1;
-        for(let i=0;i<posibilidades.length;i++) {
-            cadena +="<tr>";
-        for(let j=0;j<posibilidades[i].length;j++) {
-            cadena +="<td class=std id=casilla"+v+">"+posibilidades[i][j]+"</td>";
-            v++
-        }
-        cadena +="</tr>";
-    }
-        cadena +="</table>";
-    return cadena;
-}
-
-//CREA EL JUEGO EN UNA TABLA CON DIVS EN LAS CELDAS
-function cambio_juego() {
-    juegoFin=true;
-    turno=true;
-    document.getElementById("winner").innerText="";
-    let destino = document.getElementById("juego");
-    destino.innerHTML = "";
-    var contador = 1;
-    let tabla = document.createElement("table");
-    for (let i=1;i<=nfc;i++) {
-        let fila = document.createElement("tr");
-        for (let u=0;u<nfc;u++) {
-            let celda = document.createElement("td");
+    var turno = true;
+    var turnos = 0;
+    var juegoFin= false
+    var ndivs=16
+    function inicio() {
+        var destino = document.getElementById("marco");
+        for (let i = 1; i <= ndivs; i++) {
             let elem = document.createElement("div");
-            elem.setAttribute("id", "div_" + contador);
-            elem.setAttribute("class", "casillas");
-            elem.addEventListener("dblclick",()=>{ganador(elem);});
+            elem.setAttribute("id", "div_" + i);
+            elem.setAttribute("class", "divs");
             elem.innerHTML = "";
-            celda.appendChild(elem);
-            contador++;
-            fila.appendChild(celda);
+            elem.addEventListener("click", () => { cambio(elem); });
+            destino.appendChild(elem);
         }
-        tabla.appendChild(fila);
+        juegoFin=false
     }
-    destino.appendChild(tabla);
+    function cambio(origen) {
+    if (!juegoFin) {
+        origen.style.backgroundColor = turno ? "red" : "blue";
+        origen.innerHTML = turno == true ? "X" : "O";
+        turno = !turno;
+        turnos += 1;
+        comprobar();
+    }
 }
 
-//COMPRUEBA SI LA CELDA ESTA MARCADA PARA PONER LA CASILLA
-function ganador(casilla){
-    if(!juegoFin || casilla.style.backgroundColor!="")return;
-    if(turno){
-        casilla.style.backgroundColor="red";
-        turno = false;
-        comprobar();
-    }else{
-        casilla.style.backgroundColor="blue";
-        turno = true;
-        comprobar();
+function comprobar() {
+    let posibilidades = fPosibilidades();
+    console.log(posibilidades)
+    for (let combinacion of posibilidades) {
+        let valor = document.getElementById("div_" + combinacion[0]).innerHTML;
+        let color=document.getElementById("div_"+ combinacion[0]).style.backgroundColor;
+        let ganador = true;
+        for (let pos of combinacion) {
+            if (document.getElementById("div_" + pos).innerHTML !== valor) {
+                ganador = false;
+                break;
+            }
+        }
+        if (valor && ganador) {
+            alert(color+" ha ganado");
+            juegoFin=true;
+            return;
+        }
+    }
+    if (turnos == 16) {
+        alert("EMPATE");
+        juegoFin=true
+    }
     }
     
-}
-
-//DETERMINA SI YA HA GANADO UN JUGADOR
-function comprobar(){
-    for(let fila of posibilidades){
-        let color = document.getElementById("div_"+fila[0]).style.backgroundColor
-        let acertar=true;
-        for(let celda of fila){
-            let elem = document.getElementById("div_"+celda);
-            if(elem.style.backgroundColor!=color){
-                acertar=false;
-                break;
-            }   
+    function fPosibilidades() {
+        let nfc = 4;
+        let filas = (nfc * 2) + 2;
+        let posibilidades = new Array(filas);
+        let c = 0;
+        for (let i = 0; i < filas; i++) {
+            posibilidades[i] = new Array(nfc);
         }
-        if(acertar && color){
-            document.getElementById("winner").innerHTML="HA GANADO JUGADOR "+color.toUpperCase()
-            console.log("GANADOR "+color)
-            juegoFin=false;
-        
+        for (let i = 0; i < nfc; i++) {
+            for (let j = 0; j < nfc; j++) {
+                posibilidades[c][j] = (i * nfc) + (j + 1);
+                posibilidades[c + nfc][j] = (j * nfc) + (i + 1);
+            }
+            c++;
         }
+        c = (nfc * 2);
+        for (let i = 0; i < nfc; i++) {
+            posibilidades[c][i] = (i * nfc) + (i + 1);
+            posibilidades[c+1][i]= (i*nfc) + (nfc-i);
+        }
+        return posibilidades;
     }
-}
 
-window.addEventListener('load',()=>{cargar()});
+    function inicial() {
+        for (let i = 1; i <= 16; i++) {
+            destino = document.getElementById("div_" + i);
+            destino.innerHTML = "";
+            destino.style.backgroundColor="#057b92";
+            turnos = 0;
+        }
+        juegoFin=false
+    }
+    
+    window.addEventListener("load", () => { inicio(); });
 </script>
 <body>
-    
-    <div class="general-container">
-        <select id="idSelect"></select>
-        <div id="container">
-            <div class="contenido" id="soluciones"></div>
-            <div class="contenido" id="juego"></div>
-        </div>
-        <p id="winner"></p>
+    <div id="marco">
+    </div>
+    <div id="marco2">
+            <button id="inicio" onclick="inicial()">INICIAR</button>  
     </div>
 </body>
 </html>
