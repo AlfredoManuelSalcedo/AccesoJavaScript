@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: rgb(231, 222, 222);
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        }
+        .general-container{
+            display: grid;
+            margin: 0 auto;
+            place-items: center;
+        }
+        .container{
+            background-color: white;
+            width: 425px;
+            padding: 20px;
+            border-radius: 35px;
+            box-shadow: 0px 0px 29px 0px rgba(0,0,0,0.35);
+        }
+
+        #color{
+            margin-top: 45px;
+            border-radius: 50px;
+            width: 600px;
+            height: 600px;
+            background-color: red;
+            box-shadow: 0px 0px 29px 0px rgba(0,0,0,0.75);
+        }
+    </style>
+    <script>
+        function cargar(){
+            cambioColor();
+        }
+
+        function cambioColor(){
+            var elem = document.getElementsByName("colores");
+            let destino = document.getElementById("color");
+            for(i=0;i<elem.length;i++){
+                elem[i].addEventListener("change",()=>{cambioColor()});
+                if(elem[i].checked ==true)destino.style.backgroundColor=elem[i].value
+            }
+
+        }
+        
+        window.addEventListener("load",()=>{cargar()});
+    </script>
+</head>
+<body>
+    <div class="general-container">
+        <div class="container">
+            <fieldset>
+                <legend>COLORES</legend>
+                <input type="radio" name="colores" value="red"><label>ROJO</label>
+                <input type="radio" name="colores" value="green" checked><label>VERDE</label>
+                <input type="radio" name="colores" value="blue"><label>AZUL</label>
+                <input type="radio" name="colores" value="pink"><label>ROSA</label>
+                <input type="radio" name="colores" value="yellow"><label>AMARILLO</label>
+            </fieldset>
+        </div>
+        <div id="color"></div>
+    </div>
+</body>
+</html>
