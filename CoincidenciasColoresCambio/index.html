@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+
+</style>
+<script>
+    var nfc=3;
+    var filas=(nfc*2)+2;
+    var tb=new Array(filas)
+    function inicio(){
+            width();
+            comienzo();
+        }
+    function selectCargar(){
+            let destino =document.getElementById("opciones");
+            for (let i=3; i<10; i++){
+                let v=document.createElement("option");
+                v.text=i;
+                v.value=i;
+                destino.appendChild(v);
+            }
+    }
+    function width(){
+        function width() {
+            const el = document.getElementById('contenedor');
+            if (nfc<6) el.style.cssText ='width: '+((nfc*100)+200)+'px;';
+            else if (nfc==9) el.style.cssText ='width: '+((nfc*100)+400)+'px;';
+            else el.style.cssText ='width: '+((nfc*100)+350)+'px;';
+             
+        }
+    }
+    function comienzo(){
+            crearDiv();
+            crearArray();
+        }
+        function crearDiv(){
+                let destino=document.getElementById("contenedor");
+                if(destino !== null){
+                    while (destino.hasChildNodes()){
+                         destino.removeChild(destino.lastChild);
+                    }
+                    let columnTemplate = '';
+                }
+                for (i=1; i<=nfc*nfc; i++){
+                    let newDiv = document.createElement('div');
+                    newDiv.id="div_";
+                    newDiv.id +=i<10 ? "0"+i : i;
+                    if(i === nfc){
+                        newDiv.setAttribute("class", "boton top-right");
+                    } else if (i === (nfc*nfc)-(nfc-1)){
+                        newDiv.setAttribute("class", "boton bottom-left");
+                    }else{
+                        newDiv.setAttribute("class", "boton");
+                    }
+    
+                    newDiv.innerHTML="";
+                    newDiv.addEventListener("dblclick", ()=> {jugada(newDiv);});
+                    destino.appendChild(newDiv);
+                    
+                }
+            }
+    
+    window.addEventListener("load",()=>{selectCargar();});
+    window.addEventListener("load",()=>{inicio();});
+</script>
+<body>
+    <p style="text-align: center;"><select name="" id="opciones" onchange="cambio()"></select> </p>
+    <div id="contenedor" value="nfc" class="contenedor">        
+</div>
+<div class="botonera">
+<button type="text" id="juego" onclick="comienzo()" class="verdaderoboton"> REINICIAR</button>
+</div>
+</body>
+</html>
