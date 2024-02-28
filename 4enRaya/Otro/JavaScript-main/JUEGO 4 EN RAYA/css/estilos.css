@@ -1,0 +1,73 @@
+body{
+    background-color: rgb(94, 97, 100);
+}
+.general-container{
+    place-items: center;
+    width: 100%;
+    height: 95vh;
+    display:grid;
+}
+#container{
+    display:flex;
+    margin-top: -15%;
+    place-items: center;     
+    margin-bottom: -15%;             
+}
+.contenido{
+    background-color: rgb(221, 209, 209);
+    width: 450px;
+    height: 450px;
+    border-radius: 35px;
+    padding: 25px;
+    box-shadow: 0px 0px 23px 0px rgba(0,0,0,0.75);
+    margin: 15px;
+}
+#juego{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#idSelect{
+    width: 50px;
+    text-align: center;
+}
+.casillas{
+    background-color: rgb(209, 193, 193);
+    width: 45px;
+    height: 45px;
+    text-align: center;
+    margin: 5px;
+    border-radius: 25px;
+    box-shadow: inset 0px 0px 31px 1px rgba(22, 22, 22, 0.75);
+}
+.casillas:hover{
+    background-color: rgb(119, 115, 115);
+    cursor: pointer;
+}
+p{
+ font-size: 35px;
+ color: whitesmoke;   
+}
+#idSelect{
+    font-size: 15px;
+    width: 70px;
+    height: 30px;
+    border-radius: 25px;
+}
+#idSelect:hover{
+    cursor: pointer;
+}
+.ctd{
+    background-color: white;
+}
+.posibilidades{
+    background-color: rgb(255, 255, 255);
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    border-collapse: collapse;
+}
+.std{
+    width: 25px;
+    height: 20px;
+}

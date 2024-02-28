@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cambio temperaturas</title>
+</head>
+<style>
+.cont{
+        background-color: rgb(152, 213, 238);
+        text-align: center;
+
+        border-radius: 50PX;
+        padding: 50px;
+        width: 400px;
+        height: 100px;
+    }
+    .conte{
+        width: 550px;
+        height: 550px;
+        display: grid;
+        place-items: center;
+        margin: 0 auto;
+    }
+    .buttonDiv{
+        border: 1px solid black;
+    }
+</style>
+<script>
+    //VARIABLE QUE GUARDA QUE FUNCION USARA
+    var funcion=""
+
+    //FUNCION PARA ASIGNAR LSO RESPECTIVOS EVENTO A LOS INPUTS Y AL BOTON
+    function inicio(){
+        let seleccion=document.getElementsByName("temperaturas")
+        let boton= document.getElementById("calcular")
+        for(let i =0;i<seleccion.length;i++){
+            seleccion[i].addEventListener('change',()=>{cambio(seleccion[i])})
+        }
+        boton.addEventListener('click',()=>{calculo()})
+    }
+
+    //FUNCION PARA GUARDAR QUE FUNCION SE USARA Y CAMBIO DE LABEL
+    function cambio(quien){
+        funcion=quien.value
+        labelC=document.getElementById("resultados")
+        destino=document.getElementById("tempE")
+        destino.innerHTML=quien.id
+        labelC.innerHTML=""
+    }
+
+    //CALCULO PARA EL RESULTADO
+    function calculo(){
+        Escrito=document.getElementById("numero")
+        nnEscrito=Escrito.value
+        nEscrito=parseFloat(nnEscrito)
+        destino=document.getElementById("resultados")
+        if (funcion=="fac"){
+            ncelsius=(nEscrito-32)/1.8
+            celsius=redondear(ncelsius,2)
+            destino.innerHTML=nEscrito+" Fahrenheit = "+celsius+" Celsius"
+        }else if(funcion=="caf"){
+            nfahrenheit=(nEscrito*1.8)+32
+            fahrenheit=redondear(nfahrenheit,2)
+            destino.innerHTML=nEscrito+" Celsius = "+fahrenheit+" Fahrenheit"
+        }else if(funcion=="cak"){
+            nkelvin=nEscrito+273.15
+            kelvin=redondear(nkelvin,2)
+            destino.innerHTML=nEscrito+" Celsius = "+kelvin+" Kelvin"
+        }else if(funcion=="kac"){
+            ncelsius=nEscrito-273.15
+            celsius=redondear(ncelsius,2)
+            destino.innerHTML=nEscrito+" Kelvin = "+celsius+" Celsius"
+        }else if(funcion=="fak"){
+            nkelvin=5/9*(nEscrito-32)+273.15
+            kelvin=redondear(nkelvin,2)
+            destino.innerHTML=nEscrito+" Fahrenheit = "+kelvin+" Kelvin"
+        }else if(funcion=="kaf"){
+            nfahrenheit=1.8*(nEscrito-273.15)+32
+            fahrenheit=redondear(nfahrenheit,2)
+            destino.innerHTML=nEscrito+" Kelvin = "+fahrenheit+" Fahrenheit"
+        }else{
+            destino.innerHTML="Porfavor seleccione una opcion"
+        }
+    }
+    function redondear(n,nd){
+        let potencia = Math.pow(10,nd);
+        return (Math.round(n*potencia))/potencia
+    }
+
+//EVENTO EN LOAD
+window.addEventListener("load",()=>{inicio();})
+</script>
+<body>
+    <div class="conte">
+        <div id="marco" class="cont">
+            <label for="" id="tempE"></label>
+            <input type="number" id="numero">
+            <button id="calcular">Convertir</button><br><br>
+            <label for="resultados" id="resultados">Seleccione una opcion</label>
+            <br>
+            <br>
+            <div >
+                <fieldset class="buttonDiv">
+                    <legend>Opciones</legend>
+                    <input type="radio" name="temperaturas" value="fac" id="Fahrenheit"><label for="rojo">F a C</label>
+                    <input type="radio" name="temperaturas" value="caf" id="Celsius"><label for="verde">C a F</label>
+                    <input type="radio" name="temperaturas" value="cak" id="Celsius"><label for="azul">C a K</label>
+                    <input type="radio" name="temperaturas" value="kac" id="Kelvin"><label for="naranja">K a C</label>
+                    <input type="radio" name="temperaturas" value="fak" id="Fahrenheit"><label for="rosa">F a K</label>
+                    <input type="radio" name="temperaturas" value="kaf" id="Kelvin"><label for="negro">K a F</label>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
